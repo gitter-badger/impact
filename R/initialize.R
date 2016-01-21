@@ -51,7 +51,7 @@ loadPackages <- function(toLoad, local.lib="Rlib/") {
 }
 
 loadMetaData <- function(filename, sheetname) {
-   require(xslx)
+   require(xlsx)
    meta.result <- read.xlsx(filename, sheetName=sheetname)
 }
 
@@ -70,7 +70,7 @@ loadRPKMFile <- function(filename, path=path.to.data) {
 }
 
 loadPSIFile <- function(filename, path=path.to.data) {
-   loadGeneralData( filename, path=path )
+   psi.data <- loadGeneralData( filename, path=path )
 }
 
 ###### Exported Functions Using Defaults
@@ -84,6 +84,8 @@ defpackages <- function() {
 # This function loads the default meta data file
 defmetadata <- function(filename="IMPACT_Summary_15Aug2014.xlsx", sheetname="15Aug2014") {
    writeLines("Loading meta data with 'loadMetaData'.", stderr())
-   loadMetaData(paste(c(path.to.data,filename), collapse="/"), sheetname)
+   meta.data <<- loadMetaData(paste(c(path.to.data,filename), collapse="/"), sheetname)
+   meta.data
 }
+
 

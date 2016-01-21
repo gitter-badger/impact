@@ -11,8 +11,6 @@ impact.name <- data.frame(name=impact.rpkm$NAME)
 row.names(impact.name) <- row.names(impact.rpkm)
 impact.rpkm <- impact.rpkm[complete.cases(impact.rpkm),-1]
 
-#impact.rpkm$TB32813 <- rowMeans(impact.rpkm[,c("TB32813.1", "TB32813")])
-#impact.rpkm$TB32813.1 <- NULL
 
 head(impact.rpkm[,1:5])
 #                TB31413 TB35689 TB36090 TB32813 TB37987
