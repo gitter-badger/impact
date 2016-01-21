@@ -1,4 +1,4 @@
-# impact
+# IMPACT Project
 Meta data and code related to the IMPACT project.
 
 ## Setup Instructions
