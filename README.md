@@ -10,9 +10,9 @@ git clone git@github.com:timbitz/impact.git
 
 Now link or copy the dropbox data directory into the git repo.
 ```bash
-cd impact
-ln -s /Path/To/Dropbox/IMPACT_data
-ls -lah
+$ cd impact
+$ ln -s /Path/To/Dropbox/IMPACT_data
+$ ls -lah
 total 24
 drwxr-xr-x   7 timsw  staff   238B 21 Jan 13:55 .
 drwxr-xr-x  42 timsw  staff   1.4K 20 Jan 18:00 ..

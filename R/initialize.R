@@ -10,6 +10,7 @@ full.pkg.set <- c("xlsx",
         "pamr",
         "ggplot2",
         "reshape2",
+	"dplyr",
         "gplots",
         "RColorBrewer")
 
@@ -30,6 +31,20 @@ if(path.to.data == "") {
    path.to.data <- paste(c(path.to.git,"/IMPACT_data"), collapse="")
 }
 writeLines(sprintf("Path to data (path.to.data) is: %s", path.to.data), stderr())
+
+####### OOP
+
+# Currently unneeded.
+setClass("Expression",representation=representation(
+  def="data.frame",
+  rpkm="data.frame"
+))
+
+setClass("Splicing",representation=representation(
+  def="data.frame",
+  psi="data.frame",
+  qual="data.frame"
+))
 
 ####### Functions
 
@@ -66,11 +81,20 @@ loadGeneralData <- function(filename, path=path.to.data, namecol=1, isheader=T) 
 }
 
 loadRPKMFile <- function(filename, path=path.to.data) {
-   loadGeneralData( filename, path=path ) # default settings are already for cRPKM files  
+   loadGeneralData( filename, path=path ) # default settings are already for cRPKM files   
 }
 
 loadPSIFile <- function(filename, path=path.to.data) {
-   psi.data <- loadGeneralData( filename, path=path )
+   vast.data <- loadGeneralData( filename, path=path, namecol=2 )
+
+   psi.colnames <- colnames(vast.data)[!grepl("COMPLEX|COORD|LENGTH|FullCO|GENE|Q$", colnames(vast.data))]
+   qual.colnames <- colnames(vast.data)[grepl("Q$", colnames(vast.data))]
+
+   psi.data <- vast.data[complete.cases(vast.data),psi.colnames]
+   qual.data <- vast.data[complete.cases(vast.data),qual.colnames]
+  
+   return.obj <- new("Splicing",def=vast.data,psi=psi.data,qual=qual.data)
+   return.obj
 }
 
 ###### Exported Functions Using Defaults
